@@ -24,4 +24,4 @@ if __name__ == "__main__":
                     root.add(word, fn)
 
 
-    print(root.findWord("ej"))
+    print(root.findWord("ejjj"))

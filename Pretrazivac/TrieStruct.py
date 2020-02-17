@@ -37,7 +37,7 @@ class TrieNode(object):
                     break
             if not found:
                 return False, 0
-        return True,
+        return True
 
 
 
