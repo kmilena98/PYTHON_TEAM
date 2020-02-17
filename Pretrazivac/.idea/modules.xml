@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Pretrazivac.iml" filepath="$PROJECT_DIR$/.idea/Pretrazivac.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../projekat-git/.idea/projekat-git.iml" filepath="$PROJECT_DIR$/../../../projekat-git/.idea/projekat-git.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../projekat2_sw_73_17 (1)/.idea/projekat2_sw_73_17 (1).iml" filepath="$PROJECT_DIR$/../../../projekat2_sw_73_17 (1)/.idea/projekat2_sw_73_17 (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../zadaci/stablo/zadaci/zadaci/.idea/zadaci.iml" filepath="$PROJECT_DIR$/../../../zadaci/stablo/zadaci/zadaci/.idea/zadaci.iml" />
     </modules>
   </component>
 </project>

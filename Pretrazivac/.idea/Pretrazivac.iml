@@ -6,5 +6,8 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="projekat-git" />
+    <orderEntry type="module" module-name="zadaci" />
+    <orderEntry type="module" module-name="projekat2_sw_73_17 (1)" />
   </component>
 </module>
