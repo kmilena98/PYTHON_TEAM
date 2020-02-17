@@ -1,5 +1,5 @@
 from TrieStruct import TrieNode
-from parser2 import Parser
+from parser import Parser
 import os
 
 if __name__ == "__main__":
