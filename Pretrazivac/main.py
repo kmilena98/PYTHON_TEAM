@@ -1,5 +1,5 @@
 from TrieStruct import TrieNode
-from parser import Parser
+from parser2 import Parser
 import os
 
 if __name__ == "__main__":
@@ -24,4 +24,4 @@ if __name__ == "__main__":
                     root.add(word, fn)
 
 
-    print(root.findWord("ej"))
+    print(root.findWord("ejjj"))
