@@ -1,5 +1,7 @@
-from TrieStruct import TrieNode
+from TrieStruct import *
 from parser2 import Parser
+#from inputParser
+import time
 import os
 
 if __name__ == "__main__":
@@ -7,21 +9,25 @@ if __name__ == "__main__":
     print("Unesite direktorijum koji zelite da parsirate: ")
     dir = input()
 
+    while (not os.path.isdir(dir)):
+        print("Ne postoji uneti direktorijum")
+        dir = input()
+
     parser1 = Parser()
-    root = TrieNode(None)
+    root = Trie()
+    links = []
+    start = time.time()
 
     for dirpath, dirnames, files in os.walk(str(dir)):
-        if not dirpath:
-            print("Ne posotji takav direktorijum!")
-            break
-        else:
-            print(f'Found directory: {dirpath}')
+        print(f'Found directory: {dirpath}')
         for fn in files:
             if str(dirpath + '\\' + fn).endswith('.html'):
                 parser1.parse(dirpath + '\\' + fn)
                 print('parsiram:   ' + dirpath + '\\' + fn)
                 for word in parser1.words:
-                    root.add(word, fn)
+                    root.insert(word,fn)
 
+    print(root.search("python"))
 
-    print(root.findWord("ejjj"))
+    end = time.time()
+    print(end - start)

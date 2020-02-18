@@ -1,44 +1,58 @@
-from typing import Tuple
-class TrieNode(object):
-    def __init__(self, char):
-        self.char = char
-        self.children = []
-        self.word_finished = False
+from collections import defaultdict
+
+
+class TrieNode:
+
+    # Trie node class
+    def __init__(self):
+        self.children = defaultdict()
+        self.counter = 1
+        self.isEndOfWord = False
         self.links = []
 
-    def add(self, word,link):
-        node = self
-        word = word.lower()
-        for char in word:
-            found = False
-            for child in node.children:
-                if child.char == char:
-                    found = True
-                    node = child
-                    break
-            if not found:
-                newNode = TrieNode(char)
-                node.children.append(newNode)
-                node = newNode
-        node.word_finished = True
+
+
+class Trie:
+
+    def __init__(self):
+        self.root = self.getNode()
+
+    def getNode(self):
+
+        return TrieNode()
+
+    def _charToIndex(self, ch):
+
+        return ord(ch) - ord('a')
+
+    def insert(self, key,link):
+
+        node = self.root
+        length = len(key)
+        for level in range(length):
+            index = self._charToIndex(key[level])
+
+            # if current character is not present
+            if index not in node.children:
+                node.children[index] = self.getNode()
+            node = node.children[index]
+
+            # mark last node as leaf
+
+        node.isEndOfWord = True
+
         node.links.append(link)
-
-    def findWord(self, word):
-        node = self
-        word = word.lower()
-        if not node.children:
-            return False, 0
-        for char in word:
-            found = False
-            for child in node.children:
-                if child.char == char:
-                    found = True
-                    node = child
-                    break
-            if not found:
-                return False, 0
-        return True
-
-
+    def search(self, key):
+        node = self.root
+        length = len(key)
+        for level in range(length):
+            index = self._charToIndex(key[level])
+            if index not in node.children:
+                return False
+            node =  node.children[index]
+        if node != None and  node.isEndOfWord:
+            return True
+        else:
+            return False
 
 
