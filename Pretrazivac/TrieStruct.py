@@ -7,9 +7,8 @@ class TrieNode:
     def __init__(self):
         self.children = defaultdict()
         self.counter = 1
-        self.isEndOfWord = False
+        self.isEndOfWord = (False,0)
         self.links = []
-
 
 
 class Trie:
@@ -26,7 +25,7 @@ class Trie:
         return ord(ch) - ord('a')
 
     def insert(self, key,link):
-
+        key = key.lower()
         node = self.root
         length = len(key)
         for level in range(length):
@@ -36,13 +35,13 @@ class Trie:
             if index not in node.children:
                 node.children[index] = self.getNode()
             node = node.children[index]
+        m = node.isEndOfWord[1] + 1
+        node.isEndOfWord = (True, m)
 
-            # mark last node as leaf
-
-        node.isEndOfWord = True
-
-        node.links.append(link)
+        if link not in node.links:
+            node.links.append(link)
     def search(self, key):
+        key = key.lower()
         node = self.root
         length = len(key)
         for level in range(length):
@@ -50,9 +49,7 @@ class Trie:
             if index not in node.children:
                 return False
             node =  node.children[index]
-        if node != None and  node.isEndOfWord:
-            return True
-        else:
-            return False
+        return node != None and  node.isEndOfWord,node.links
+
 
 

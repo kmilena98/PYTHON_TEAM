@@ -1,6 +1,6 @@
 from TrieStruct import *
 from parser2 import Parser
-#from inputParser
+from InputParser import ParsirajU
 import time
 import os
 
@@ -17,7 +17,6 @@ if __name__ == "__main__":
     root = Trie()
     links = []
     start = time.time()
-
     for dirpath, dirnames, files in os.walk(str(dir)):
         print(f'Found directory: {dirpath}')
         for fn in files:
@@ -28,6 +27,6 @@ if __name__ == "__main__":
                     root.insert(word,fn)
 
     print(root.search("python"))
-
     end = time.time()
     print(end - start)
+    ParsirajU()
