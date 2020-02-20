@@ -1,31 +1,36 @@
-
-def ParsirajU():
+from set import *
+from TrieStruct import *
+def ParsirajU(root):
     upit = input("Unesite upit:")
-    delovi = upit.strip().split()
-    ispravan = True
-    if delovi[0].upper() in ("AND", "OR") or delovi[-1].upper() in ("AND", "OR", "NOT"):
-        print("Neispravan upit.")
-        return ParsirajU()
+    delovi = upit.split()
+    skup = [None]*len(delovi)
 
-    if len(delovi) == 3 and delovi[1].upper() in ("AND", "OR", "NOT"):
-        operator = delovi[1]
-        if (operator == "AND"):
-            print(operator)
-        elif (operator == "NOT"):
-            print(operator)
+
+    i = 0
+    for rec in delovi:
+        if rec.upper() in ("AND", "OR", "NOT"):
+            skup[i] = rec.upper()
+            print(rec.upper())
+            i += 1
         else:
-            print(operator)
-    else:
-        print("obican")
+            if not root.search(rec)[0][0] :
+                skup[i] = Set()
+                print("Rec " + rec + " ne postoji u parsiranim fajlovima")
+                i+=1
+            else:
+                skup[i] = root.search(rec)[2].IntoSet()
+                skup[i].Ispisi()
+                i+=1
 
     if len(delovi) > 3:
         for rec in delovi:
              if rec.upper() in ("AND", "OR", "NOT"):
                 print("Neispravan upit,ukoliko upit ima logicki operator mora biti u formatu --rec1 operator rec2--")
-                ispravan = False
-                while(not ispravan):
-                    upit = input("Unesite upit:")
+                ParsirajU(root)
 
+    if delovi[0].upper() in ("AND", "OR") or delovi[-1].upper() in ("AND", "OR", "NOT"):
+        print("Neispravan upit,ukoliko upit ima logicki operator mora biti u formatu --rec1 operator rec2--")
+        ParsirajU(root)
 
 
 

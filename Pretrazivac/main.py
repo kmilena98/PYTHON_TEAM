@@ -1,5 +1,6 @@
 from TrieStruct import *
 from parser2 import Parser
+from set import Set
 from InputParser import ParsirajU
 import time
 import os
@@ -26,7 +27,7 @@ if __name__ == "__main__":
                 for word in parser1.words:
                     root.insert(word,fn)
 
-    print(root.search("python"))
+    print(root.search("pyt"))
     end = time.time()
     print(end - start)
-    ParsirajU()
+    ParsirajU(root)
