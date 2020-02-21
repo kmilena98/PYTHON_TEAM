@@ -42,10 +42,16 @@ if __name__ == "__main__":
                 parser1.parse(dirpath + '//' + fn)
                 print('parsiram:   ' + dirpath + '//' + fn)
                 for word in parser1.words:
-                    root.insert(word,fn)
+                    root.insert(word,os.path.join(dirpath,fn))
 
-    print(root.search("pyt"))
+    print(root.search("python"))
     end = time.time()
     print(end - start)
-    ucitajUGraf(str(dir))
-    ParsirajU(root)
+    #ucitajUGraf(str(dir))
+
+    s = ParsirajU(root)
+    if(s.Duzina() == 0):
+        print("Rezultat pretrage : 0")
+    else:
+        print("Rezultat pretrage : ")
+        s.Ispisi()
