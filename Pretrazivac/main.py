@@ -38,9 +38,9 @@ if __name__ == "__main__":
     for dirpath, dirnames, files in os.walk(str(dir)):
         print(f'Found directory: {dirpath}')
         for fn in files:
-            if str(dirpath + '\\' + fn).endswith('.html'):
-                parser1.parse(dirpath + '\\' + fn)
-                print('parsiram:   ' + dirpath + '\\' + fn)
+            if str(dirpath + '//' + fn).endswith('.html'):
+                parser1.parse(dirpath + '//' + fn)
+                print('parsiram:   ' + dirpath + '//' + fn)
                 for word in parser1.words:
                     root.insert(word,fn)
 
