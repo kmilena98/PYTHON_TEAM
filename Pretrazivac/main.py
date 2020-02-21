@@ -47,5 +47,11 @@ if __name__ == "__main__":
     print(root.search("python"))
     end = time.time()
     print(end - start)
-    ucitajUGraf(str(dir))
-    ParsirajU(root)
+    #ucitajUGraf(str(dir))
+
+    s = ParsirajU(root)
+    if(s.Duzina() == 0):
+        print("Rezultat pretrage : 0")
+    else:
+        print("Rezultat pretrage : ")
+        s.Ispisi()

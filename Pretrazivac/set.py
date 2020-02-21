@@ -23,7 +23,7 @@ class Set():
         rezultat = copy.copy(self)
         if s2 is not None:
             for Link in s2.dict:
-                rezultat.add(Link)
+                rezultat.dodaj(Link)
         return rezultat
 
     def Presek(self, s2):
@@ -38,7 +38,7 @@ class Set():
         import copy
         s1 = copy.copy(self)
         for Link in s2.dict:
-            if s1.sadrziLink(Link):
+            if s1.dict.__contains__(Link):
                 s1.UkloniLink(Link)
         return s1
 
