@@ -2,8 +2,24 @@ from TrieStruct import *
 from parser2 import Parser
 from set import Set
 from InputParser import ParsirajU
+from graf import Graph
 import time
 import os
+
+def ucitajUGraf(path):
+    g = Graph()
+    mojParser = Parser()
+    for subdir, dirs, files in os.walk(path):
+        for name in files:
+                 if name.endswith('.html'):
+                     links,words = mojParser.parse(os.path.join(subdir,name))
+                     #self.build(os.path.join(subdir,name),words)
+                     g.dodajCvor(name,links,words,os.path.join(subdir,name))
+
+    print("DODAVANJE U GRAF ZAVRSENO")
+    return g
+
+
 
 if __name__ == "__main__":
     print("Trenutni direktorijum je: " + os.getcwd())
@@ -18,6 +34,7 @@ if __name__ == "__main__":
     root = Trie()
     links = []
     start = time.time()
+    g = Graph()
     for dirpath, dirnames, files in os.walk(str(dir)):
         print(f'Found directory: {dirpath}')
         for fn in files:
@@ -30,4 +47,5 @@ if __name__ == "__main__":
     print(root.search("pyt"))
     end = time.time()
     print(end - start)
+    ucitajUGraf(str(dir))
     ParsirajU(root)
