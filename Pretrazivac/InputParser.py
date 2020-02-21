@@ -5,6 +5,15 @@ def ParsirajU(root):
     delovi = upit.split()
     skup = [None]*len(delovi)
 
+    if len(delovi) > 3:
+        for rec in delovi:
+             if rec.upper() in ("AND", "OR", "NOT"):
+                print("Neispravan upit,ukoliko upit ima logicki operator mora biti u formatu --rec1 operator rec2--")
+                ParsirajU(root)
+
+    if delovi[0].upper() in ("AND", "OR") or delovi[-1].upper() in ("AND", "OR", "NOT"):
+        print("Neispravan upit,ukoliko upit ima logicki operator mora biti u formatu --rec1 operator rec2--")
+        ParsirajU(root)
 
     i = 0
     for rec in delovi:
@@ -22,15 +31,7 @@ def ParsirajU(root):
                 skup[i].Ispisi()
                 i+=1
 
-    if len(delovi) > 3:
-        for rec in delovi:
-             if rec.upper() in ("AND", "OR", "NOT"):
-                print("Neispravan upit,ukoliko upit ima logicki operator mora biti u formatu --rec1 operator rec2--")
-                ParsirajU(root)
 
-    if delovi[0].upper() in ("AND", "OR") or delovi[-1].upper() in ("AND", "OR", "NOT"):
-        print("Neispravan upit,ukoliko upit ima logicki operator mora biti u formatu --rec1 operator rec2--")
-        ParsirajU(root)
 
 
 
