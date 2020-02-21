@@ -27,7 +27,7 @@ if __name__ == "__main__":
                 for word in parser1.words:
                     root.insert(word,fn)
 
-    print(root.search("pyt"))
+    print(root.search("python"))
     end = time.time()
     print(end - start)
     ParsirajU(root)
