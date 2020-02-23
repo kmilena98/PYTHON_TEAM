@@ -58,3 +58,29 @@ class Trie:
         return  node.isEndOfWord,node.links,node
 
 
+    def zaVrednost(self,rijecZaPretragu):
+        rijec = rijecZaPretragu.lower()
+
+        if rijec == '':
+            return False
+        if rijec is None:
+            print("Error")
+
+        cvor = self.root
+
+        novicvor = self.search(rijec)[2] # ovde nam se nalazi cvor za prvi rec
+
+
+        exists = True
+
+        for slovo in rijec:
+            if slovo in novicvor.children:
+                novicvor = novicvor.children[slovo]
+            else:
+                exists = False
+                break
+        if exists:
+            if not novicvor.isEndOfWord:
+                exists = False
+
+        return exists,novicvor

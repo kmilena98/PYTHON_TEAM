@@ -1,3 +1,4 @@
+import  os
 class Set():
     def __init__(self):
         self.dict = {}
@@ -5,6 +6,8 @@ class Set():
     def dodaj(self, Link):
         if not self.sadrziLink(Link):
             self.dict[Link] = Link
+    def kljucevi(self):
+        return self.dict.keys()
 
     def sadrziLink(self, Link):
         for i in self.dict:
@@ -31,7 +34,7 @@ class Set():
         for Link in self.dict:
             for Link2 in s2.dict:
                 if Link == Link2:
-                    rezultat.add(Link)
+                    rezultat.dodaj(Link)
         return rezultat
 
     def Komplement(self, s2):
@@ -43,5 +46,13 @@ class Set():
         return s1
 
     def Ispisi(self):
+        lista = []
         for item in self.dict:
             print(item)
+
+
+    def toList(self):
+        ret = []
+        for item in self.keys():
+            ret.append(item)
+        return ret
