@@ -53,8 +53,35 @@ class Trie:
         for level in range(length):
             index = self._charToIndex(key[level])
             if index not in node.children:
-                return node.isEndOfWord,node.links,node
+                return None
             node =  node.children[index]
         return  node.isEndOfWord,node.links,node
 
 
+    def zaVrednost(self,rijecZaPretragu):
+        rijec = rijecZaPretragu.lower()
+
+        if rijec == '':
+            return False
+        if rijec is None:
+            print("Error")
+
+        cvor = self.root
+        if self.search(rijec):
+            novicvor = self.search(rijec)[2] # ovde nam se nalazi cvor za prvi rec
+        else:
+            novicvor = self.root
+
+        exists = True
+
+        for slovo in rijec:
+            if slovo in novicvor.children:
+                novicvor = novicvor.children[slovo]
+            else:
+                exists = False
+                break
+        if exists:
+            if not novicvor.isEndOfWord:
+                exists = False
+
+        return exists,novicvor
