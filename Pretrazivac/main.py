@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
                 print('parsiram:   ' + dirpath + '//' + fn)
                 for word in parser1.words:
-                    root.insert(word,dirpath + '\\' + fn)
+                    root.insert(word,dirpath + '//' + fn)
 
 
 
@@ -60,32 +60,28 @@ if __name__ == "__main__":
         print("Rezultat pretrage : ")
         s[0].Ispisi()
 
-    #1
 
+    #1
     rjecnikZaRangiranje = rjecnikZaRang(root, s[1], s[0]) # uticaj broja reci koji se pojavljuje u datom linku
     print("RJECNIK ZA RANGIRANJE PRE UTICAJA LINKOVA")
     if len(rjecnikZaRangiranje)!= 0:
         print(rjecnikZaRangiranje)
-        uticajLinkova(g, s[0], rjecnikZaRangiranje)
+    #2
+        uticajVrednostiLinkova(g, s[0], rjecnikZaRangiranje)
         print("RJECNIK POSLE UTICAJA LINKOVA")
         print(rjecnikZaRangiranje)
+    #3
+        uticajBrojaLinkova(root, g, rjecnikZaRangiranje, s[1])
+        print("RJECNIK POSLE UTICAJA LINKOVA")
+        print(rjecnikZaRangiranje)
+        # u rjecnikZaRangiranje se nalazi rjecnik, kljucevi su linkovi a vrednosti su rangovi
+
     else:
         print("Nema fajlova koji zadovoljavaju pretragu!")
 
 
-    #2
-    uticajVrednostiLinkova(g,s[0],rjecnikZaRangiranje)   #uticaj vrednosti linkova koji pokazuju na dati link i sadrze rec
-    print("RJECNIK POSLE UTICAJA LINKOVA")
-    print(rjecnikZaRangiranje)
 
-<<<<<<< HEAD
-    #3
-    uticajBrojaLinkova(root,g,rjecnikZaRangiranje,s[1])
-    print("RJECNIK POSLE UTICAJA LINKOVA")
-    print(rjecnikZaRangiranje)
-    # u rjecnikZaRangiranje se nalazi rjecnik, kljucevi su linkovi a vrednosti su rangovi
 
-=======
->>>>>>> d9e09b6e84f4e333317af6490d57ce508551c4c3
+
 
 
