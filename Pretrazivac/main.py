@@ -31,23 +31,24 @@ if __name__ == "__main__":
     for dirpath, dirnames, files in os.walk(str(dir)):
         print(f'Found directory: {dirpath}')
         for fn in files:
-            if str(dirpath + '\\' + fn).endswith('.html'):
-                parsed = parser1.parse(dirpath + '\\' + fn)
+            if str(dirpath + '//' + fn).endswith('.html'):
+                parsed = parser1.parse(dirpath + '//' + fn)
 
                 #*deo za graf
                 p = os.path.join(dirpath, fn)
                 p = os.path.abspath(p)
                 g.addPage(p, parsed[0])
 
-                print('parsiram:   ' + dirpath + '\\' + fn)
+                print('parsiram:   ' + dirpath + '//' + fn)
+
                 for word in parser1.words:
-                    root.insert(word,dirpath + '\\' + fn)
+                    root.insert(word,dirpath + '//' + fn)
 
 
 
 
 
-    print(root.search("python"))
+    #print(root.search("python"))
     end = time.time()
     print(end - start)
 
@@ -55,24 +56,27 @@ if __name__ == "__main__":
 
     s = ParsirajU(root)# s vraca trazenu listu i niz rijeci iz upita (s,exists)
     s[0].kljucevi()
-
+    print()
+    print("********************************************************************")
     if(s[0].Duzina() == 0):
         print("Rezultat pretrage : 0")
     else:
         print("Rezultat pretrage : ")
         s[0].Ispisi()
-
-
+    print("********************************************************************")
+    print("rjecnik:")
     #1
     rjecnikZaRangiranje = rjecnikZaRang(root, s[1], s[0]) # uticaj broja reci koji se pojavljuje u datom linku
-    print("RJECNIK ZA RANGIRANJE PRE UTICAJA LINKOVA")
+    #print("RJECNIK ZA RANGIRANJE PRE UTICAJA LINKOVA")
     if len(rjecnikZaRangiranje)!= 0:
         print(rjecnikZaRangiranje)
+        print("********************************************************************")
     #2
         uticajVrednostiLinkova(g, s[0], rjecnikZaRangiranje)
         print("RJECNIK POSLE UTICAJA LINKOVA")
         print(rjecnikZaRangiranje)
     #3
+        '''
         uticajBrojaLinkova(root, g, rjecnikZaRangiranje, s[1])
         print("RJECNIK POSLE UTICAJA LINKOVA")
         print(rjecnikZaRangiranje)
@@ -88,6 +92,7 @@ if __name__ == "__main__":
             print(i.getPage(),i.getRang())
 
         paginacija(listaZaSortiranje)
+        '''
 
     else:
         print("Nema fajlova koji zadovoljavaju pretragu!")

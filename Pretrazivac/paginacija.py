@@ -63,7 +63,6 @@ def paginacija(lista):
 
 def ispis(lista, first, last,poruka):
     print("RANK & PAGES:" )
-    print("VRACAM BROJEVE")
     print(first, last)
     print()
 

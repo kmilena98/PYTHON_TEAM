@@ -16,8 +16,12 @@ class PageRang:
         self.rang = r
 
 
-def rjecnikZaRang(root, delovi, s):
+def rjecnikZaRang(root, d, s):
     rjecnik = {}
+    delovi = []
+    for a in d:
+        if a.upper() not in ("NOT","AND","OR"):
+            delovi.append(a)
 
     novaLista = []  # ulisti se nalaze linkovi
 

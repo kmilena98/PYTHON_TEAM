@@ -58,6 +58,7 @@ class Trie:
         return  node.isEndOfWord,node.links,node
 
 
+
     def zaVrednost(self,rijecZaPretragu):
         rijec = rijecZaPretragu.lower()
 
@@ -85,3 +86,4 @@ class Trie:
                 exists = False
 
         return exists,novicvor
+
