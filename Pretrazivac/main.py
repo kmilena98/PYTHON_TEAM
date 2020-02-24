@@ -30,17 +30,17 @@ if __name__ == "__main__":
     for dirpath, dirnames, files in os.walk(str(dir)):
         print(f'Found directory: {dirpath}')
         for fn in files:
-            if str(dirpath + '//' + fn).endswith('.html'):
-                parsed = parser1.parse(dirpath + '//' + fn)
+            if str(dirpath + '\\' + fn).endswith('.html'):
+                parsed = parser1.parse(dirpath + '\\' + fn)
 
                 #*deo za graf
                 p = os.path.join(dirpath, fn)
                 p = os.path.abspath(p)
                 g.addPage(p, parsed[0])
 
-                print('parsiram:   ' + dirpath + '//' + fn)
+                print('parsiram:   ' + dirpath + '\\' + fn)
                 for word in parser1.words:
-                    root.insert(word,dirpath + '//' + fn)
+                    root.insert(word,dirpath + '\\' + fn)
 
 
 
