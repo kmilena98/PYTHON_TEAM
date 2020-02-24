@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
                 print('parsiram:   ' + dirpath + '//' + fn)
                 for word in parser1.words:
-                    root.insert(word,os.path.join(dirpath,fn))
+                    root.insert(word,dirpath + '\\' + fn)
 
 
 
@@ -66,6 +66,9 @@ if __name__ == "__main__":
     print("RJECNIK ZA RANGIRANJE PRE UTICAJA LINKOVA")
     if len(rjecnikZaRangiranje)!= 0:
         print(rjecnikZaRangiranje)
+        uticajLinkova(g, s[0], rjecnikZaRangiranje)
+        print("RJECNIK POSLE UTICAJA LINKOVA")
+        print(rjecnikZaRangiranje)
     else:
         print("Nema fajlova koji zadovoljavaju pretragu!")
 
@@ -75,11 +78,14 @@ if __name__ == "__main__":
     print("RJECNIK POSLE UTICAJA LINKOVA")
     print(rjecnikZaRangiranje)
 
+<<<<<<< HEAD
     #3
     uticajBrojaLinkova(root,g,rjecnikZaRangiranje,s[1])
     print("RJECNIK POSLE UTICAJA LINKOVA")
     print(rjecnikZaRangiranje)
     # u rjecnikZaRangiranje se nalazi rjecnik, kljucevi su linkovi a vrednosti su rangovi
 
+=======
+>>>>>>> d9e09b6e84f4e333317af6490d57ce508551c4c3
 
 

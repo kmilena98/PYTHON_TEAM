@@ -53,7 +53,7 @@ class Trie:
         for level in range(length):
             index = self._charToIndex(key[level])
             if index not in node.children:
-                return node.isEndOfWord,node.links,node
+                return None
             node =  node.children[index]
         return  node.isEndOfWord,node.links,node
 
@@ -67,9 +67,10 @@ class Trie:
             print("Error")
 
         cvor = self.root
-
-        novicvor = self.search(rijec)[2] # ovde nam se nalazi cvor za prvi rec
-
+        if self.search(rijec):
+            novicvor = self.search(rijec)[2] # ovde nam se nalazi cvor za prvi rec
+        else:
+            novicvor = self.root
 
         exists = True
 

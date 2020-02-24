@@ -26,7 +26,7 @@ def ParsirajU(root):
             rez[i] = rec.upper()
             i = i + 1
         else:
-            if not root.search(rec)[0][0]:
+            if not root.search(rec):
                 rez[i] = Set()
                 i = i + 1
             else:
