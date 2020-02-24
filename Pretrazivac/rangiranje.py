@@ -45,7 +45,7 @@ def rjecnikZaRang(root, delovi, s):
                     rjecnik[page] += vrednost[1].links[page]
 
     for page in novaLista:
-        rjecnik[page] = rjecnik[page] * 0.5
+       rjecnik[page] = rjecnik[page] * 0.5
 
     return rjecnik
 

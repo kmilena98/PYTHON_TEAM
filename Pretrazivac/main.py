@@ -8,6 +8,7 @@ import time
 import os
 from rangiranje import *
 from sortiranje import *
+from paginacija import *
 #python-2.7.7-docs-html
 
 
@@ -86,6 +87,7 @@ if __name__ == "__main__":
         for i in listaZaSortiranje:
             print(i.getPage(),i.getRang())
 
+        paginacija(listaZaSortiranje)
 
     else:
         print("Nema fajlova koji zadovoljavaju pretragu!")
