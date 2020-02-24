@@ -7,6 +7,7 @@ from graf import *
 import time
 import os
 from rangiranje import *
+from sortiranje import *
 #python-2.7.7-docs-html
 
 
@@ -76,8 +77,19 @@ if __name__ == "__main__":
         print(rjecnikZaRangiranje)
         # u rjecnikZaRangiranje se nalazi rjecnik, kljucevi su linkovi a vrednosti su rangovi
 
+        listaZaSortiranje = []
+        for strana in rjecnikZaRangiranje.keys():
+            listaZaSortiranje.append(PageRang(strana,rjecnikZaRangiranje[strana]))
+
+        heap_sort(listaZaSortiranje)
+        print("Sortirani rangocvi su:")
+        for i in listaZaSortiranje:
+            print(i.getPage(),i.getRang())
+
+
     else:
         print("Nema fajlova koji zadovoljavaju pretragu!")
+
 
 
 
