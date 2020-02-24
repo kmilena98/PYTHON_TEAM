@@ -6,7 +6,8 @@ from InputParser import *
 from graf import *
 import time
 import os
-
+from rangiranje import *
+#python-2.7.7-docs-html
 
 
 
@@ -28,15 +29,15 @@ if __name__ == "__main__":
     for dirpath, dirnames, files in os.walk(str(dir)):
         print(f'Found directory: {dirpath}')
         for fn in files:
-            if str(dirpath + '\\' + fn).endswith('.html'):
-                parsed = parser1.parse(dirpath + '\\' + fn)
+            if str(dirpath + '//' + fn).endswith('.html'):
+                parsed = parser1.parse(dirpath + '//' + fn)
 
                 #*deo za graf
                 p = os.path.join(dirpath, fn)
                 p = os.path.abspath(p)
                 g.addPage(p, parsed[0])
 
-                print('parsiram:   ' + dirpath + '\\' + fn)
+                print('parsiram:   ' + dirpath + '//' + fn)
                 for word in parser1.words:
                     root.insert(word,os.path.join(dirpath,fn))
 
@@ -59,7 +60,9 @@ if __name__ == "__main__":
         print("Rezultat pretrage : ")
         s[0].Ispisi()
 
-    rjecnikZaRangiranje = rjecnikZaRang(root, s[1], s[0])
+    #1
+
+    rjecnikZaRangiranje = rjecnikZaRang(root, s[1], s[0]) # uticaj broja reci koji se pojavljuje u datom linku
     print("RJECNIK ZA RANGIRANJE PRE UTICAJA LINKOVA")
     if len(rjecnikZaRangiranje)!= 0:
         print(rjecnikZaRangiranje)
@@ -67,8 +70,16 @@ if __name__ == "__main__":
         print("Nema fajlova koji zadovoljavaju pretragu!")
 
 
-
-    uticajLinkova(g,s[0],rjecnikZaRangiranje)
+    #2
+    uticajVrednostiLinkova(g,s[0],rjecnikZaRangiranje)   #uticaj vrednosti linkova koji pokazuju na dati link i sadrze rec
     print("RJECNIK POSLE UTICAJA LINKOVA")
     print(rjecnikZaRangiranje)
+
+    #3
+    uticajBrojaLinkova(root,g,rjecnikZaRangiranje,s[1])
+    print("RJECNIK POSLE UTICAJA LINKOVA")
+    print(rjecnikZaRangiranje)
+    # u rjecnikZaRangiranje se nalazi rjecnik, kljucevi su linkovi a vrednosti su rangovi
+
+
 

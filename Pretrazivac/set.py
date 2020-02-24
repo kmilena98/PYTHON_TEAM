@@ -1,11 +1,15 @@
 import  os
 class Set():
-    def __init__(self):
-        self.dict = {}
+    def __init__(self,skup = None):
+        if skup==None:
+            self.dict = {}
+        else:
+            self.dict = skup.dict
 
     def dodaj(self, Link):
         if not self.sadrziLink(Link):
             self.dict[Link] = Link
+
     def kljucevi(self):
         return self.dict.keys()
 
@@ -22,28 +26,26 @@ class Set():
         del self.dict[Link]
 
     def Unija(self, s2):
-        import copy
-        rezultat = copy.copy(self)
-        if s2 is not None:
-            for Link in s2.dict:
-                rezultat.dodaj(Link)
-        return rezultat
+        ret = Set()
+        for link1 in s2.dict:
+            ret.dodaj(link1)
+        for link2 in self.dict:
+            ret.dodaj(link2)
+        return ret
 
     def Presek(self, s2):
-        rezultat = Set()
+        ret= Set()
         for Link in self.dict:
-            for Link2 in s2.dict:
-                if Link == Link2:
-                    rezultat.dodaj(Link)
-        return rezultat
+            if s2.sadrziLink(Link):
+                ret.dodaj(Link)
+        return ret
 
     def Komplement(self, s2):
-        import copy
-        s1 = copy.copy(self)
-        for Link in s2.dict:
-            if s1.dict.__contains__(Link):
-                s1.UkloniLink(Link)
-        return s1
+        ret = Set()
+        for Link in self.dict:
+            if not s2.sadrziLink(Link):
+                ret.dodaj(Link)
+        return ret
 
     def Ispisi(self):
         lista = []
