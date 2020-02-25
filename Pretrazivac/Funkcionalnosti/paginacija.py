@@ -51,6 +51,9 @@ def paginacija(lista):
             else:
                 if int(no)< last-first:
                     poruka=""
+
+                if int(no) < last - first:
+                    poruka = ""
                 number = int(no)
                 if first + number > lista.__len__():
                     last = lista.__len__()

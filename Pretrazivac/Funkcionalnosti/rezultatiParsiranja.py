@@ -1,5 +1,5 @@
 import os
-from graf import Graph
+from StrukturePodataka.graf import Graph
 
 class RezultatParsirajna:
     def __init__(self, links, words, name, abs_path):

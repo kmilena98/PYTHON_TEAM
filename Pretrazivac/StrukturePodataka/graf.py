@@ -1,7 +1,7 @@
 import os
 
-from TrieStruct import Trie
-from parser2 import Parser
+from StrukturePodataka.TrieStruct import Trie
+from Funkcionalnosti.parser2 import Parser
 
 class Graph:
     def __init__(self):

@@ -55,6 +55,6 @@ class Set():
 
     def toList(self):
         ret = []
-        for item in self.keys():
+        for item in self.dict.keys():
             ret.append(item)
         return ret
