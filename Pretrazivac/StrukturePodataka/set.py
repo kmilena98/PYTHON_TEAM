@@ -30,7 +30,8 @@ class Set():
         for link1 in s2.dict:
             ret.dodaj(link1)
         for link2 in self.dict:
-            ret.dodaj(link2)
+            if link2 not in s2.dict:
+                ret.dodaj(link2)
         return ret
 
     def Presek(self, s2):

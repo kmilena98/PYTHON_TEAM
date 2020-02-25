@@ -1,6 +1,7 @@
 from StrukturePodataka.TrieStruct import *
-from Funkcionalnosti.parser2 import Parser
 from StrukturePodataka.set import Set
+from StrukturePodataka.ispis import *
+from Funkcionalnosti.parser2 import Parser
 from Funkcionalnosti.InputParser import *
 #from graf import Graph
 from StrukturePodataka.graf import *
@@ -14,7 +15,7 @@ from Funkcionalnosti.paginacija import *
 
 def menu():
     print("*********************")
-    print("\tIzaberite opciju: ")
+    print("\tIzaberite sadrzaj: ")
     print("1. Promenite direktorijum ")
     print("2. Unesite upit za pretragu ")
     print("0. Izlaz")
@@ -56,10 +57,6 @@ if __name__ == "__main__":
                 for word in parser1.words:
                     trie.insert(word,dirpath + '//' + fn)
 
-                #print('parsiram:   ' + dirpath + '\\' + fn)
-                for word in parser1.words:
-                    trie.insert(word,absPath)
-
     end = time.time()
     print(end - start)
     unos = 1
@@ -80,7 +77,6 @@ if __name__ == "__main__":
             start = time.time()
 
             for dirpath, dirnames, files in os.walk(str(dir)):
-                #print(f'Pronadjen direktorijum: {dirpath}')
                 for fn in files:
                     if fn.endswith('.html') or fn.endswith('.htm'):
                         absPath = os.path.join(dirpath, fn)
@@ -95,33 +91,65 @@ if __name__ == "__main__":
         elif unos == "2":
             s = ParsirajU(trie) # s vraca trazenu listu i niz rijeci iz upita (s,exists)
 #1
-            rjecnikZaRangiranje = rjecnikZaRang(trie, s[1], s[0]) # uticaj broja reci koji se pojavljuje u datom linku
-            print("RJECNIK ZA RANGIRANJE PRE UTICAJA LINKOVA")
+            r = rjecnikZaRang(trie, s[1], s[0]) # uticaj broja reci koji se pojavljuje u datom linku
+            rjecnikZaRangiranje = r[0]
+            ## r[1] je broj razlicitih reci na linku
             if len(rjecnikZaRangiranje)!= 0:
-                print(rjecnikZaRangiranje)
+                uticajBrojaReci(rjecnikZaRangiranje)
+                uticajReci = {}
+                for k in rjecnikZaRangiranje.keys():
+                    uticajReci[k] = rjecnikZaRangiranje[k]
+                #print("1. UTICAJ RECI U LINKU")
+                #print(rjecnikZaRangiranje)
+                #print("---------------------------------------------------------------")
             #2
-                uticajVrednostiLinkova(g, s[0], rjecnikZaRangiranje)
-                print("RJECNIK POSLE UTICAJA LINKOVA")
-                print(rjecnikZaRangiranje)
+               # print("---------------------------------------------------------------")
+
+                uticajVrednostiLinkova(g, rjecnikZaRangiranje.keys(), rjecnikZaRangiranje)
+                uticajVLinkova = {}
+                for k in rjecnikZaRangiranje.keys():
+                    uticajVLinkova[k] = rjecnikZaRangiranje[k]
+                #print("2.UTICAJ VREDNOSTI LINKOVA")
+                #print(rjecnikZaRangiranje)
+                #print("---------------------------------------------------------------")
             #3
-
+                #print("---------------------------------------------------------------")
+                uticajRazlicitihReci(r[1],rjecnikZaRangiranje)
+                uticajRazReci = {}
+                for k in rjecnikZaRangiranje.keys():
+                    uticajRazReci[k] = rjecnikZaRangiranje[k]
+                #print("3.UTICAJ RAZLICITIH RECI U LINKOVIMA")
+                #print(rjecnikZaRangiranje)
+                #print("---------------------------------------------------------------")
+            #4
+                print(
+                    "----------------------------------------------------------------------------------------------------------------------------")
                 uticajBrojaLinkova(trie, g, rjecnikZaRangiranje, s[1])
-
-                uticajBrojaLinkova(trie, g, rjecnikZaRangiranje, s[1])
-                print("RJECNIK POSLE UTICAJA LINKOVA")
-                print(rjecnikZaRangiranje)
+                uticajBrLinkova = {}
+                for k in rjecnikZaRangiranje.keys():
+                    uticajBrLinkova[k] = rjecnikZaRangiranje[k]
+                #print("4. UTICAJ BROJA LINKOVA")
+                #print(rjecnikZaRangiranje)
+                print("----------------------------------------------------------------------------------------------------------------------------")
                 # u rjecnikZaRangiranje se nalazi rjecnik, kljucevi su linkovi a vrednosti su rangovi
+
+                print("R1       R2      R3      R4                                    link" )
+                for a in rjecnikZaRangiranje.keys():
+                    cvor = Ispis(uticajReci[a],uticajVLinkova[a],uticajRazReci[a],uticajBrLinkova[a],a)
+                    cvor.Ispisi()
 
                 listaZaSortiranje = []
                 for strana in rjecnikZaRangiranje.keys():
                     listaZaSortiranje.append(PageRang(strana,rjecnikZaRangiranje[strana]))
 
+                #SORTIRANJE
                 heap_sort(listaZaSortiranje)
-                print("************************************")
-                print("Sortirani rangocvi su:")
-                for i in listaZaSortiranje:
-                    print(i.getPage(),i.getRang())
+                #print("************************************")
+                #print("Sortirani rangocvi su:")
+                #for i in listaZaSortiranje:
+                #    print(i.getPage(),i.getRang())
 
+                #PAGINACIJA
                 paginacija(listaZaSortiranje)
 
 
@@ -132,46 +160,6 @@ if __name__ == "__main__":
 
         elif unos == "0":
             break
-
-    s = ParsirajU(trie)# s vraca trazenu listu i niz rijeci iz upita (s,exists)
-    s[0].kljucevi()
-    print()
-    print("********************************************************************")
-    if(s[0].Duzina() == 0):
-        print("Rezultat pretrage : 0")
-    else:
-        print("Rezultat pretrage : ")
-        s[0].Ispisi()
-    print("********************************************************************")
-    print("rjecnik:")
-    #1
-    rjecnikZaRangiranje = rjecnikZaRang(trie, s[1], s[0]) # uticaj broja reci koji se pojavljuje u datom linku
-    #print("RJECNIK ZA RANGIRANJE PRE UTICAJA LINKOVA")
-    if len(rjecnikZaRangiranje)!= 0:
-        print(rjecnikZaRangiranje)
-        print("********************************************************************")
-    #2
-        uticajVrednostiLinkova(g, s[0], rjecnikZaRangiranje)
-        print("RJECNIK POSLE UTICAJA LINKOVA")
-        print(rjecnikZaRangiranje)
-    #3
-
-        uticajBrojaLinkova(trie, g, rjecnikZaRangiranje, s[1])
-        print("RJECNIK POSLE UTICAJA LINKOVA")
-        print(rjecnikZaRangiranje)
-        # u rjecnikZaRangiranje se nalazi rjecnik, kljucevi su linkovi a vrednosti su rangovi
-
-        listaZaSortiranje = []
-        for strana in rjecnikZaRangiranje.keys():
-            listaZaSortiranje.append(PageRang(strana,rjecnikZaRangiranje[strana]))
-
-        heap_sort(listaZaSortiranje)
-        print("Sortirani rangocvi su:")
-        for i in listaZaSortiranje:
-            print(i.getPage(),i.getRang())
-
-        paginacija(listaZaSortiranje)
-
 
 
 

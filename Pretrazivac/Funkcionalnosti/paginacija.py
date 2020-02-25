@@ -1,4 +1,4 @@
-
+import math
 
 def paginacija(lista):
     number = 10 # na googlu ima 10 linkova na jednoj pretrazi
@@ -11,7 +11,7 @@ def paginacija(lista):
         last = number
     poruka = ""
     while True:
-        ispis(lista, first, last,poruka)
+        ispis(lista, first, last,poruka,number)
         print()
 
         option = pom(poruka)
@@ -45,9 +45,16 @@ def paginacija(lista):
                 last = first
                 first -= number
         elif option == "C" or option == "c":
-            no = input("Enter number: ")
+            #no = input("Unesi broj : ")
+            while True:
+                try:
+                    no = int(input("Unesi broj : "))
+                    break
+                except ValueError:
+                    print('Unesite prirodan broj.')
+
             if int(no) < 0:
-                print("Error: please enter a postive integer." )
+                print("Greska pri unosu! Unesi broj" )
             else:
                 if int(no)< last-first:
                     poruka=""
@@ -66,31 +73,36 @@ def paginacija(lista):
         elif option == "x" or option == "X":
             return
 
-def ispis(lista, first, last,poruka):
-    print("RANK & PAGES:" )
-    print()
+def ispis(lista, first, last,poruka,broj):
+    print("----------------------------------------------------------------------------------------------------------------------------")
+    print("----------------------------------------------------------------------------------------------------------------------------")
+
+    print("                                    RANK & PAGES:" ,int(math.ceil(last/broj)))
 
     if poruka == "Na pocetku fajla ste!":
         print(poruka)
     for i in range(first, last, 1):
-        print( str(lista[i].getRang()) + " " + lista[i].getPage() )
+        print( str(round(lista[i].getRang(),2)) + " " + lista[i].getPage() )
 
     if poruka=="Dosli ste do kraja fajla!":
         print(poruka)
 
 
 def pom(poruka):
-    print("Izaberite jednu od ponudjenih opcija: ")
+    print("----------------------------------------------------------------------------------------------------------------------------")
+    print("----------------------------------------------------------------------------------------------------------------------------")
+
+    print("\t\tIzaberite jednu od ponudjenih opcija: ")
     while True:
         if poruka!="Na pocetku fajla ste!":
             print("BACK (B)")
         if poruka != "Dosli ste do kraja fajla!":
             print("NEXT (N)")
         #    print(colors.CYAN + "\t\tBACK (B)" + colors.END)
-        print("Change number of pages (C)")
+        print("Promeni broj linkova na stranici (C)")
         print("Exit (X)")
         print()
-        option = input("Your input: ")
+        option = input("Unesi : ")
 
         if poruka != "Dosli ste do kraja fajla!":
             if option.upper() not in ("B", "N", "C", "X"):

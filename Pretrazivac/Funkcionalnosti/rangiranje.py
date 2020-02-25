@@ -18,25 +18,22 @@ class PageRang:
 
 def rjecnikZaRang(root, d, s):
     rjecnik = {}
+    recnikZaRazliciteReci = {}
     delovi = []
     for a in d:
         if a.upper() not in ("NOT","AND","OR"):
             delovi.append(a)
 
     novaLista = []  # ulisti se nalaze linkovi
-
     for a in s.kljucevi():
         # print(a)
         m = os.path.relpath(a)
         novaLista.append(os.path.abspath(a))
-    # listalinkova = [k for k in s]   #ovako se smestaju kljucevi iz recnika u listu
-    # print("LISTA :")
-    # print(listaLinkova)
 
     for page in novaLista:
-        # print(page)
         rjecnik[page] = 0  # inicijalizovanje svih vrednosti rjecnika
-        # print("ulazi u 2 for")
+        recnikZaRazliciteReci[page]=0
+
 
     for rec in delovi:
         vrednost = root.zaVrednost(rec)  # vrednost treba da bude cvor na kom  se zavrsava rijec
@@ -45,25 +42,21 @@ def rjecnikZaRang(root, d, s):
             m = os.path.relpath(pom)
             novaMapa[os.path.abspath(pom)]=vrednost[1].links[pom]
 
-        #if vrednost[0]:
-        #    print("Linkovi cvora:")
-        #    print(vrednost[1].links)
         if vrednost[1]:  # da li je ovde vrednost[1] ili vrednost od 0 ja msm od 0!!
             for page in novaMapa:
                 if page in rjecnik.keys():
                     rjecnik[page] += novaMapa[page]
-                    #rjecnik2[page]+=1
+                    recnikZaRazliciteReci[page]+=1
 
-    for page in novaLista:
-       rjecnik[page] = rjecnik[page] * 0.5
-
-    return rjecnik
+    #for page in rjecnik.keys():
+    #   rjecnik[page] = rjecnik[page]*0.5
+    return rjecnik,recnikZaRazliciteReci
 
 
 def uticajVrednostiLinkova(root, linkoviUpita, rjecnikUpita):
     # linkovi upita su kratki kao i rjecnikUpita
 
-    for link1 in linkoviUpita.kljucevi():
+    for link1 in linkoviUpita:
         # I link1 je kratak takodje
         dodatak = 0
 
@@ -91,6 +84,7 @@ def uticajVrednostiLinkova(root, linkoviUpita, rjecnikUpita):
             if link2 in rjecnikUpita.keys():
                 dodatak += rjecnikUpita[link2]
                 rjecnikUpita[link1] = dodatak * 0.3
+    return rjecnikUpita
 
 def  uticajBrojaLinkova(root,g,rjecnikLinkova,rijeci):
 
@@ -101,6 +95,18 @@ def  uticajBrojaLinkova(root,g,rjecnikLinkova,rijeci):
                 else:
                     rjecnikLinkova[page]+=0.5
         return rjecnikLinkova
+
+def uticajRazlicitihReci(mapaRazlicitihReci,mapaZaRang):
+        for page in mapaZaRang.keys():
+            mapaZaRang[page]=mapaRazlicitihReci[page]*mapaZaRang[page]
+        return mapaZaRang
+
+
+def uticajBrojaReci(mapaZaRang):
+    for page in mapaZaRang.keys():
+        mapaZaRang[page] = mapaZaRang[page]*0.5
+    return mapaZaRang
+
 
 
 
