@@ -1,8 +1,8 @@
 from StrukturePodataka.TrieStruct import *
 from StrukturePodataka.set import Set
-from StrukturePodataka.ispis import *
+from Funkcionalnosti.ispis import *
 from Funkcionalnosti.parser2 import Parser
-from Funkcionalnosti.InputParser import *
+from Funkcionalnosti.ParserUpita import *
 #from graf import Graph
 from StrukturePodataka.graf import *
 import time
@@ -40,29 +40,23 @@ if __name__ == "__main__":
     start = time.time()
     g = Graph()
     for dirpath, dirnames, files in os.walk(str(dir)):
-        #print(f'Pronadjen direktorijum: {dirpath}')
         for fn in files:
-
-            if str(dirpath + '//' + fn).endswith('.html'):
-                parsed = parser1.parse(dirpath + '//' + fn)
-
             if fn.endswith('.html') or fn.endswith('.htm'):
                 absPath = os.path.join(dirpath, fn)
                 parsed = parser1.parse(absPath)
 
                 g.addPage(absPath, parsed[0])
 
-                print('parsiram:   ' + dirpath + '//' + fn)
-
                 for word in parser1.words:
-                    trie.insert(word,dirpath + '//' + fn)
+                    trie.insert(word, absPath)
 
     end = time.time()
     print(end - start)
-    unos = 1
+    unos = -1
     while unos != 0:
         unos = menu()
         if unos == "1":
+            parser1 = Parser()
             trie = Trie()
             g = Graph()
             print("Trenutni direktorijum je: " + os.getcwd())

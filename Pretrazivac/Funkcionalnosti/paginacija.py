@@ -49,7 +49,7 @@ def paginacija(lista,r0,r1,r2,r3,r4):
                 except ValueError:
                     print('Unesite prirodan broj.')
 
-            if int(no) < 0:
+            if int(no) <= 0:
                 print("Greska pri unosu! Unesi broj" )
             else:
                 if int(no)< last-first:
