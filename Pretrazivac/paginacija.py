@@ -49,6 +49,8 @@ def paginacija(lista):
             if int(no) < 0:
                 print("Error: please enter a postive integer." )
             else:
+                if int(no)< last-first:
+                    poruka=""
                 number = int(no)
                 if first + number > lista.__len__():
                     last = lista.__len__()
@@ -63,7 +65,6 @@ def paginacija(lista):
 
 def ispis(lista, first, last,poruka):
     print("RANK & PAGES:" )
-    print(first, last)
     print()
 
     if poruka == "Na pocetku fajla ste!":

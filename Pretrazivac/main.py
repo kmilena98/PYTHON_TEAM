@@ -54,14 +54,6 @@ if __name__ == "__main__":
                 for word in parser1.words:
                     root.insert(word,dirpath + '//' + fn)
 
-<<<<<<< HEAD
-
-
-
-
-    #print(root.search("python"))
-=======
->>>>>>> 0da88fab4cce87055e7809d9521509deaf71528d
     end = time.time()
     print(end - start)
     unos = 1
@@ -107,6 +99,7 @@ if __name__ == "__main__":
                 print("RJECNIK POSLE UTICAJA LINKOVA")
                 print(rjecnikZaRangiranje)
             #3
+
                 uticajBrojaLinkova(root, g, rjecnikZaRangiranje, s[1])
                 print("RJECNIK POSLE UTICAJA LINKOVA")
                 print(rjecnikZaRangiranje)
@@ -117,22 +110,22 @@ if __name__ == "__main__":
                     listaZaSortiranje.append(PageRang(strana,rjecnikZaRangiranje[strana]))
 
                 heap_sort(listaZaSortiranje)
+                print("************************************")
                 print("Sortirani rangocvi su:")
                 for i in listaZaSortiranje:
                     print(i.getPage(),i.getRang())
 
                 paginacija(listaZaSortiranje)
 
+
             else:
                 print("Nema fajlova koji zadovoljavaju pretragu!")
+
 
 
         elif unos == "0":
             break
 
-
-
-<<<<<<< HEAD
     s = ParsirajU(root)# s vraca trazenu listu i niz rijeci iz upita (s,exists)
     s[0].kljucevi()
     print()
@@ -155,7 +148,7 @@ if __name__ == "__main__":
         print("RJECNIK POSLE UTICAJA LINKOVA")
         print(rjecnikZaRangiranje)
     #3
-        '''
+
         uticajBrojaLinkova(root, g, rjecnikZaRangiranje, s[1])
         print("RJECNIK POSLE UTICAJA LINKOVA")
         print(rjecnikZaRangiranje)
@@ -171,10 +164,7 @@ if __name__ == "__main__":
             print(i.getPage(),i.getRang())
 
         paginacija(listaZaSortiranje)
-        '''
-=======
 
->>>>>>> 0da88fab4cce87055e7809d9521509deaf71528d
 
 
 
