@@ -1,14 +1,14 @@
-from TrieStruct import *
-from parser2 import Parser
-from set import Set
-from InputParser import *
+from StrukturePodataka.TrieStruct import *
+from Funkcionalnosti.parser2 import Parser
+from StrukturePodataka.set import Set
+from Funkcionalnosti.InputParser import *
 #from graf import Graph
-from graf import *
+from StrukturePodataka.graf import *
 import time
 import os
-from rangiranje import *
-from sortiranje import *
-from paginacija import *
+from Funkcionalnosti.rangiranje import *
+from Funkcionalnosti.sortiranje import *
+from Funkcionalnosti.paginacija import *
 #python-2.7.7-docs-html
 
 
@@ -34,24 +34,22 @@ if __name__ == "__main__":
     if not os.path.isabs(dir):
         dir = os.path.abspath(dir)
     parser1 = Parser()
-    root = Trie()
+    trie = Trie()
 
     start = time.time()
     g = Graph()
     for dirpath, dirnames, files in os.walk(str(dir)):
-        print(f'Pronadjen direktorijum: {dirpath}')
+        #print(f'Pronadjen direktorijum: {dirpath}')
         for fn in files:
-            if str(dirpath + '\\' + fn).endswith('.html'):
-                parsed = parser1.parse(dirpath + '\\' + fn)
+            if fn.endswith('.html') or fn.endswith('.htm'):
+                absPath = os.path.join(dirpath, fn)
+                parsed = parser1.parse(absPath)
 
-                #*deo za graf
-                p = os.path.join(dirpath, fn)
-                p = os.path.abspath(p)
-                g.addPage(p, parsed[0])
+                g.addPage(absPath, parsed[0])
 
-                print('parsiram:   ' + dirpath + '\\' + fn)
+                #print('parsiram:   ' + dirpath + '\\' + fn)
                 for word in parser1.words:
-                    root.insert(word,dirpath + '\\' + fn)
+                    trie.insert(word,absPath)
 
     end = time.time()
     print(end - start)
@@ -59,6 +57,8 @@ if __name__ == "__main__":
     while unos != 0:
         unos = menu()
         if unos == "1":
+            trie = Trie()
+            g = Graph()
             print("Trenutni direktorijum je: " + os.getcwd())
             print("Unesite direktorijum koji zelite da parsirate: ")
             dir = input()
@@ -71,25 +71,22 @@ if __name__ == "__main__":
             start = time.time()
 
             for dirpath, dirnames, files in os.walk(str(dir)):
-                print(f'Pronadjen direktorijum: {dirpath}')
+                #print(f'Pronadjen direktorijum: {dirpath}')
                 for fn in files:
-                    if str(dirpath + '\\' + fn).endswith('.html'):
-                        parsed = parser1.parse(dirpath + '\\' + fn)
+                    if fn.endswith('.html') or fn.endswith('.htm'):
+                        absPath = os.path.join(dirpath, fn)
+                        parsed = parser1.parse(absPath)
 
-                        # *deo za graf
-                        p = os.path.join(dirpath, fn)
-                        p = os.path.abspath(p)
-                        g.addPage(p, parsed[0])
+                        g.addPage(absPath, parsed[0])
 
-                        print('parsiram:   ' + dirpath + '\\' + fn)
                         for word in parser1.words:
-                            root.insert(word, dirpath + '\\' + fn)
+                            trie.insert(word,absPath)
             end = time.time()
             print(end - start)
         elif unos == "2":
-            s = ParsirajU(root) # s vraca trazenu listu i niz rijeci iz upita (s,exists)
+            s = ParsirajU(trie) # s vraca trazenu listu i niz rijeci iz upita (s,exists)
 #1
-            rjecnikZaRangiranje = rjecnikZaRang(root, s[1], s[0]) # uticaj broja reci koji se pojavljuje u datom linku
+            rjecnikZaRangiranje = rjecnikZaRang(trie, s[1], s[0]) # uticaj broja reci koji se pojavljuje u datom linku
             print("RJECNIK ZA RANGIRANJE PRE UTICAJA LINKOVA")
             if len(rjecnikZaRangiranje)!= 0:
                 print(rjecnikZaRangiranje)
@@ -98,7 +95,7 @@ if __name__ == "__main__":
                 print("RJECNIK POSLE UTICAJA LINKOVA")
                 print(rjecnikZaRangiranje)
             #3
-                uticajBrojaLinkova(root, g, rjecnikZaRangiranje, s[1])
+                uticajBrojaLinkova(trie, g, rjecnikZaRangiranje, s[1])
                 print("RJECNIK POSLE UTICAJA LINKOVA")
                 print(rjecnikZaRangiranje)
                 # u rjecnikZaRangiranje se nalazi rjecnik, kljucevi su linkovi a vrednosti su rangovi

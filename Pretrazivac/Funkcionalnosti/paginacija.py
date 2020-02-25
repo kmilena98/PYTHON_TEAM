@@ -49,6 +49,8 @@ def paginacija(lista):
             if int(no) < 0:
                 print("Error: please enter a postive integer." )
             else:
+                if int(no) < last - first:
+                    poruka = ""
                 number = int(no)
                 if first + number > lista.__len__():
                     last = lista.__len__()

@@ -1,5 +1,5 @@
 from collections import defaultdict
-from set import Set
+from StrukturePodataka.set import Set
 
 class TrieNode:
 
