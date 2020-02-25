@@ -1,6 +1,6 @@
 import math
 
-def paginacija(lista):
+def paginacija(lista,r0,r1,r2,r3,r4):
     number = 10 # na googlu ima 10 linkova na jednoj pretrazi
     first = 0
     last = 0
@@ -11,17 +11,13 @@ def paginacija(lista):
         last = number
     poruka = ""
     while True:
-        ispis(lista, first, last,poruka,number)
+        ispis(lista, first, last,poruka,number,r0,r1,r2,r3,r4)
         print()
 
         option = pom(poruka)
 
         if option == "N" or option == "n":
             poruka=""
-            #first += number
-            #last += number
-            #if last > lista.__len__():
-            #    last = lista.__len__()
             if last + number > lista.__len__():
                 last = lista.__len__()
                 if first+number > lista.__len__():
@@ -37,7 +33,7 @@ def paginacija(lista):
             poruka=""
             if first - number < 0:
                 first = 0
-                last = number #mislim da fali if kad je broj stranica manji od number
+                last = number
                 poruka="Na pocetku fajla ste!"
                 if last> lista.__len__():
                     last= lista.__len__()
@@ -73,16 +69,19 @@ def paginacija(lista):
         elif option == "x" or option == "X":
             return
 
-def ispis(lista, first, last,poruka,broj):
+def ispis(lista, first, last,poruka,broj,m0,m1,m2,m3,m4):
     print("----------------------------------------------------------------------------------------------------------------------------")
     print("----------------------------------------------------------------------------------------------------------------------------")
 
     print("                                    RANK & PAGES:" ,int(math.ceil(last/broj)))
-
+    print("RANG\t\tBR RECI\t\tR1\t\t\tR2\t\t\tR3\t\t\tR4\t\t\t\t\t\t\t\t\t\t\tlink")
     if poruka == "Na pocetku fajla ste!":
         print(poruka)
     for i in range(first, last, 1):
-        print( str(round(lista[i].getRang(),2)) + " " + lista[i].getPage() )
+
+        print("%0.3f\t\t%0.3f\t\t%0.3f\t\t%0.3f\t\t%0.3f\t\t%0.3f\t\t%s"%( lista[i].getRang(),m0[lista[i].getPage()],m1[lista[i].getPage()],m2[lista[i].getPage()],m3[lista[i].getPage()],m4[lista[i].getPage()],lista[i].getPage()))
+        #print("%0.3f\t\t%0.3f\t\t%0.3f\t\t%0.3f\t\t%0.3f\t\t%0.3f\t\t" % ( m0[lista[i].getPage()], m1[lista[i].getPage()], m2[lista[i].getPage()], m3[lista[i].getPage()], m4[lista[i].getPage()]))
+        #print( str(round(lista[i].getRang(),3)) + " " + lista[i].getPage() )
 
     if poruka=="Dosli ste do kraja fajla!":
         print(poruka)

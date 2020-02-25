@@ -1,4 +1,5 @@
 import os
+import math
 class PageRang:
 
     def __init__(self,page,rang):
@@ -50,11 +51,14 @@ def rjecnikZaRang(root, d, s):
 
     #for page in rjecnik.keys():
     #   rjecnik[page] = rjecnik[page]*0.5
-    return rjecnik,recnikZaRazliciteReci
+    return rjecnik,recnikZaRazliciteReci#rjecnik je pravi rjecnik sa brojem reci a recnik za razlicite reci je br razlicitih reci na linku
 
 
 def uticajVrednostiLinkova(root, linkoviUpita, rjecnikUpita):
     # linkovi upita su kratki kao i rjecnikUpita
+    broj = 10 * 0.5
+    for link1 in linkoviUpita:
+        rjecnikUpita[link1] = broj
 
     for link1 in linkoviUpita:
         # I link1 je kratak takodje
@@ -80,31 +84,51 @@ def uticajVrednostiLinkova(root, linkoviUpita, rjecnikUpita):
            pomList.append(os.path.abspath(m))
         '''
 
+
+        dodatak = 1
         for link2 in root.get_incoming(link1):
             if link2 in rjecnikUpita.keys():
-                dodatak += rjecnikUpita[link2]
-                rjecnikUpita[link1] = dodatak * 0.3
+                dodatak += rjecnikUpita[link2] #dodatak sadrzi zbir vrednosti svih njegovih linkova
+        rjecnikUpita[link1] = broj/dodatak
+
+    #print(rjecnikUpita)
+
     return rjecnikUpita
 
 def  uticajBrojaLinkova(root,g,rjecnikLinkova,rijeci):
+
+        broj = 10*0.2
+        for page in rjecnikLinkova.keys():
+            rjecnikLinkova[page]=1
 
         for page in rjecnikLinkova.keys():
             for node in g.get_incoming(os.path.abspath(page)):
                 if root.zaVrednost(node):
                     rjecnikLinkova[page]+=1
                 else:
-                    rjecnikLinkova[page]+=0.5
+                    rjecnikLinkova[page]+=0
+
+        #print(rjecnikLinkova)
+
+        for page in rjecnikLinkova.keys():
+            rjecnikLinkova[page] = broj/rjecnikLinkova[page]
+        #print(rjecnikLinkova)
         return rjecnikLinkova
 
 def uticajRazlicitihReci(mapaRazlicitihReci,mapaZaRang):
-        for page in mapaZaRang.keys():
-            mapaZaRang[page]=mapaRazlicitihReci[page]*mapaZaRang[page]
-        return mapaZaRang
+    rang1 = {}
+    for page in mapaZaRang.keys():
+        rang1[page] = 10
+
+    for page in mapaZaRang.keys():
+        rang1[page]= math.pow(rang1[page],mapaRazlicitihReci[page])
+    return rang1
 
 
 def uticajBrojaReci(mapaZaRang):
+    broj = 10*0.3
     for page in mapaZaRang.keys():
-        mapaZaRang[page] = mapaZaRang[page]*0.5
+        mapaZaRang[page] = broj/mapaZaRang[page]
     return mapaZaRang
 
 
